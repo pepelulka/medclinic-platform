@@ -16,4 +16,4 @@ COPY ./src ./src
 RUN pip install -r requirements.txt
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["python", "-u", "./src/main.py"]
+CMD ["uvicorn", "main:app"]

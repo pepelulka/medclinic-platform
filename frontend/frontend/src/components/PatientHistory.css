@@ -1,0 +1,65 @@
+.patient-history {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .patient-history h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .history-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .history-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .doctor-name {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .event-type {
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  
+  .event-diagnosis {
+    color: #007bff;
+  }
+  
+  .event-test {
+    color: #ffc107;
+  }
+  
+  .event-recovery {
+    color: #28a745;
+  }
+  
+  .description {
+    margin-bottom: 10px;
+  }
+  
+  .record-time {
+    font-size: 0.9em;
+    color: #555;
+  }
+  
+  .loader {
+    text-align: center;
+    font-size: 1.5em;
+    color: #007bff;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+  }
+  

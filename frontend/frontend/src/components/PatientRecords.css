@@ -1,0 +1,60 @@
+/* Основной контейнер */
+.appointments-container {
+    width: 10;
+    padding: 1rem;
+    overflow-y: auto;
+    background-color: #f9f9f9; /* Нежный светлый фон */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Лёгкая тень */
+  }
+  
+  /* Заголовки */
+  .appointments-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #4caf50; /* Подчёркивание */
+    padding-bottom: 0.5rem;
+  }
+  
+  .appointments-subtitle {
+    font-size: 1.5rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Список записей */
+  .appointments-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .appointment-item {
+    background-color: #fff; /* Белый фон для записи */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .appointment-item:hover {
+    transform: translateY(-3px); /* Лёгкий подъём при наведении */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Увеличение тени */
+  }
+  
+  .appointment-item strong {
+    color: #4caf50; /* Акцент на важных словах */
+  }
+  
+  /* Сообщение об отсутствии записей */
+  .no-appointments-message {
+    font-size: 1rem;
+    color: #777;
+    font-style: italic;
+    text-align: center;
+    margin-top: 1rem;
+  }

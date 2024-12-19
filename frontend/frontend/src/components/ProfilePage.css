@@ -1,0 +1,12 @@
+pf-edit-label {
+  margin-right: 10px;  /* Отступ между меткой и полем ввода */
+  white-space: nowrap;  /* Не разрешаем перенос текста на новую строку */
+}
+
+pf-edit-input {
+  margin-left: 10px;  /* Сдвигаем поле ввода чуть правее */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;  /* Ширина поля ввода */
+}

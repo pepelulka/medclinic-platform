@@ -1,35 +1,76 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+
+import ProfilePage from "./components/ProfilePage.jsx"
+import PatientHistory from "./components/PatientHistory.jsx"
+
+import SidebarMenu from "./Sidebar.jsx"
+import AdminSidebarMenu from './AdminSidebar.jsx';
+import AuthForm from './components/AuthForm.jsx';
+import UnAuth from "./components/UnAuth.jsx";
+import PatientRecords from './components/PatientRecords.jsx';
+import { AddDoctor, AddPatient } from './components/AdminPanel.jsx';
+import AppointmentsLogs from './components/AppointmentsLogs.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [authorized, setAuthorized] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [patientId, setPatientId] = useState(null)
+
+  useEffect(() => {
+    const localPatientId = Cookies.get('patient_id')
+
+    if (localPatientId && localPatientId == 'admin') {
+      setAuthorized(true);
+      setIsAdmin(true);
+    } else if (localPatientId && localPatientId != 'deleted') {
+      setAuthorized(true);
+      setPatientId(localPatientId);
+    } else {
+      setAuthorized(false);
+      setPatientId(null);
+      setIsAdmin(false);
+    }
+  })
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    { authorized ? (
+      <>
+      {
+        isAdmin ? (
+          <Router>
+            <div className="app" style={{ display: "flex", height: "100vh" }}>
+              <AdminSidebarMenu />
+              <Routes>
+                <Route path="/logout" element={<UnAuth />} />
+                <Route path="/patients/add" element={<AddPatient />} />
+                <Route path="/doctors/add" element={<AddDoctor />} />
+                <Route path="/logs" element={<AppointmentsLogs />} />
+                </Routes>
+            </div>
+          </Router>
+        ) : (
+          <Router>
+            <div className="app" style={{ display: "flex", height: "100vh" }}>
+                <SidebarMenu /> {/* Боковая панель */}
+                <Routes>
+                    <Route path="/logout" element={<UnAuth />} />
+                    <Route path="/" element={<ProfilePage />} />
+                    <Route path="/history" element={<PatientHistory />} />
+                    <Route path="/appointments" element={<PatientRecords />} />
+                </Routes>
+            </div>
+        </Router>
+        )
+      }
+      </>
+    ) : ( <AuthForm /> )
+    }
     </>
-  )
+  );
 }
 
-export default App
+export default App;

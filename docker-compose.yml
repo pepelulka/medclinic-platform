@@ -28,8 +28,10 @@ services:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - POSTGRES_DB
+    expose:
+      - "8000"
     volumes:
-      - ./migrations:/migrations
+      - ./migrations:/migrations:ro
     networks:
       - app-network
 

@@ -10,7 +10,7 @@ POSTGRES_SETTINGS: Dict[str, str] = {
     'user': os.getenv('POSTGRES_USER'),
     'password': os.getenv('POSTGRES_PASSWORD'),
     'db': os.getenv('POSTGRES_DB'),
-    'host': 'postgres',
+    'host': os.getenv('POSTGRES_HOST'),
     'port': '5432',
 }
 

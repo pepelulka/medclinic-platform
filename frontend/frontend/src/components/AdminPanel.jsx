@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AdminPanel.css'; // Добавим стили отдельно
+import { getBackendHost } from '../Settings.jsx'
 
 export const AddPatient = () => {
+  const BACKEND_HOST = getBackendHost();
+
   const [patientInfo, setPatientInfo] = useState({
     name: '',
     phone_number: '',
@@ -18,7 +21,7 @@ export const AddPatient = () => {
   const handleAddPatient = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost/api/patients/add', {
+      const response = await axios.post(`${BACKEND_HOST}/api/patients/add`, {
         patient_info: patientInfo,
         user_login: userLogin,
       });
@@ -98,7 +101,7 @@ export const AddDoctor = () => {
 
   useEffect(() => {
     // Получение списка специальностей врачей
-    axios.get('http://localhost/api/specialities')
+    axios.get(`${BACKEND_HOST}/api/specialities`)
       .then(response => setSpecialities(response.data))
       .catch(error => console.error('Ошибка загрузки специальностей:', error));
   }, []);
@@ -106,7 +109,7 @@ export const AddDoctor = () => {
   const handleAddDoctor = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost/api/doctors/add', doctorInfo);
+      const response = await axios.post(`${BACKEND_HOST}/api/doctors/add`, doctorInfo);
       alert('Врач успешно добавлен!');
       setDoctorInfo({ name: '', speciality: '', experience: '', email: '', phone_number: '' });
     } catch (error) {

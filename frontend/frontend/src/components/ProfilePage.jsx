@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./ProfilePage.css"
+import { getBackendHost } from '../Settings.jsx'
 
 const ProfilePage = () => {
+  const BACKEND_HOST = getBackendHost();
+
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);

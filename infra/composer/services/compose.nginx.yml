@@ -1,0 +1,14 @@
+services:
+  nginx:
+    image: nginx
+    container_name: nginx-medclinic
+    depends_on:
+      - app_service
+      - frontend_service
+    ports:
+      - "80:80"
+    volumes:
+      - ../nginx.conf:/etc/nginx/nginx.conf:ro # Config file for nginx
+      # - ./frontend/frontend/dist/:/usr/share/nginx/html # All the react app files are here
+    networks:
+      - app-network

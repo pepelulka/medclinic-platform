@@ -3,9 +3,11 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import "./ProfilePage.css"
 import "./PatientRecords.css"
+import { getBackendHost } from '../Settings.jsx'
 
 const PatientRecords = () => {
   const patientId = Cookies.get('patient_id');
+  const BACKEND_HOST = getBackendHost();
 
   const [appointments, setAppointments] = useState([]);
   const [doctors, setDoctors] = useState([]);
@@ -33,9 +35,9 @@ const PatientRecords = () => {
       try {
         setLoading(true);
         const [appointmentsRes, doctorsRes, clinicsRes] = await Promise.all([
-          axios.get(`http://localhost/api/appointments/${patientId}`),
-          axios.get('http://localhost/api/doctors'),
-          axios.get('http://localhost/api/clinics'),
+          axios.get(`${BACKEND_HOST}/api/appointments/${patientId}`),
+          axios.get(`${BACKEND_HOST}/api/doctors`),
+          axios.get(`${BACKEND_HOST}/api/clinics`),
         ]);
 
         setAppointments(appointmentsRes.data);
@@ -59,7 +61,7 @@ const PatientRecords = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost/api/appointments/create', formData, {
+      await axios.post(`${BACKEND_HOST}/api/appointments/create`, formData, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -68,7 +70,7 @@ const PatientRecords = () => {
       setFormData({ patient_id: patientId, doctor_id: '', clinic_id: '', time: '' });
       // Optionally reload appointments
       const updatedAppointments = await axios.get(
-        `http://localhost/api/appointments/${patientId}`
+        `${BACKEND_HOST}/api/appointments/${patientId}`
       );
       setAppointments(updatedAppointments.data);
     } catch (err) {
@@ -77,9 +79,9 @@ const PatientRecords = () => {
   };
 
   const deleteAppointment = async (appointmentId) => {
-    await axios.delete(`http://localhost/api/appointments/delete/${appointmentId}`)
+    await axios.delete(`${BACKEND_HOST}/api/appointments/delete/${appointmentId}`)
     const updatedAppointments = await axios.get(
-      `http://localhost/api/appointments/${patientId}`
+      `${BACKEND_HOST}/api/appointments/${patientId}`
     );
     setAppointments(updatedAppointments.data);
   }

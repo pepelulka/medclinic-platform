@@ -1,0 +1,4 @@
+services:
+  app_service:
+    ports:
+      - "10000:8000"

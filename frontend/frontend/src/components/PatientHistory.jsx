@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import './PatientHistory.css';
+import { getBackendHost } from '../Settings.jsx'
 
 const PatientHistory = () => {
+  const BACKEND_HOST = getBackendHost();
+
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,7 +17,7 @@ const PatientHistory = () => {
 
     const fetchHistory = async () => {
       try {
-        const response = await fetch(`http://localhost/api/history/${patientId}`);
+        const response = await fetch(`${BACKEND_HOST}/api/history/${patientId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch patient history.');
         }

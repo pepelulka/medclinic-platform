@@ -7,13 +7,14 @@ RUN curl -fsSL \
     https://raw.githubusercontent.com/pressly/goose/master/install.sh |\
     sh
 
-WORKDIR ./app
+WORKDIR /root/app
 
 COPY ./requirements.txt ./requirements.txt
+RUN pip install -r requirements.txt
+
 COPY ./docker-entrypoint.sh ./docker-entrypoint.sh
 COPY ./src ./src
 
-RUN pip install -r requirements.txt
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["uvicorn", "main:app"]
+CMD [ "/root/app/src", "uvicorn", "main:app", "--host", "0.0.0.0" ]

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { getBackendHost } from '../Settings.jsx'
 
 const AppointmentsLogs = () => {
+  const BACKEND_HOST = getBackendHost();
+
   const [logs, setLogs] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -13,7 +16,7 @@ const AppointmentsLogs = () => {
     try {
       const skip = (page - 1) * limit
       const response = await axios.get(
-        `http://localhost/api/appointments_logs?skip=${skip}&limit=${limit}`
+        `${BACKEND_HOST}/api/appointments_logs?skip=${skip}&limit=${limit}`
       );
       setLogs(response.data.logs);
       setTotal(response.data.total);

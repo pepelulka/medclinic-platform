@@ -1,0 +1,11 @@
+{
+    "database": {
+        "host": "localhost",
+        "port": 5432,
+        "user": "pepe",
+        "password": "pepe",
+        "dbName": "pepe"
+    },
+    "jwtSecretKey": "PEPE",
+    "host": "localhost"
+}

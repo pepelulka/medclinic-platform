@@ -1,0 +1,14 @@
+services:
+  app:
+    compose_name: app-service
+    depends_on:
+    - postgres
+  front:
+    compose_name: frontend
+  nginx:
+    compose_name: nginx
+    depends_on:
+    - app
+    - front
+  postgres:
+    compose_name: postgres

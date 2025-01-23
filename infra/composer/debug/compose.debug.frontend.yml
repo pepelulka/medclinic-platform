@@ -1,0 +1,4 @@
+services:
+  frontend_service:
+    ports:
+      - "10001:5173"

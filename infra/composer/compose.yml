@@ -1,0 +1,8 @@
+networks:
+  app-network:
+    name: app-network
+
+volumes:
+  postgres-data:
+    driver: local
+    name: postgres-data

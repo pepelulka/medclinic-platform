@@ -1,0 +1,12 @@
+services:
+  frontend_service:
+    build:
+      context: ../../frontend
+      dockerfile: Dockerfile
+    container_name: frontend-service-medclinic
+    restart:
+      always
+    expose:
+      - "5173"
+    networks:
+      - app-network

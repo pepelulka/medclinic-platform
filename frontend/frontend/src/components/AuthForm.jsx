@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import './AuthForm.css';
+import { getBackendHost } from '../Settings.jsx'
 
 const AuthForm = () => {
+  const BACKEND_HOST = getBackendHost();
+
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     login: '',
@@ -28,11 +31,11 @@ const AuthForm = () => {
     }
 
     if (isLogin) {
-        fetch("http://localhost/api/login", {
+        fetch(`${BACKEND_HOST}/api/login`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "http://localhost",
+              "Access-Control-Allow-Origin": BACKEND_HOST,
               "Access-Control-Allow-Credentials": true
             },
             withCredentials: true,

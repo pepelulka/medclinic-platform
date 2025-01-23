@@ -12,6 +12,7 @@ import UnAuth from "./components/UnAuth.jsx";
 import PatientRecords from './components/PatientRecords.jsx';
 import { AddDoctor, AddPatient } from './components/AdminPanel.jsx';
 import AppointmentsLogs from './components/AppointmentsLogs.jsx';
+import { getBackendHost } from "./Settings.jsx"
 
 function App() {
 
@@ -19,7 +20,10 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false)
   const [patientId, setPatientId] = useState(null)
 
+  const BACKEND_HOST = getBackendHost();
+
   useEffect(() => {
+    console.log(BACKEND_HOST)
     const localPatientId = Cookies.get('patient_id')
 
     if (localPatientId && localPatientId == 'admin') {

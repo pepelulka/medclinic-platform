@@ -8,14 +8,15 @@ import (
 
 type Config struct {
 	Database struct {
-		Host     string `json:"host"`
-		Port     int    `json:"port"`
-		User     string `json:"user"`
-		Password string `json:"password"`
-		DbName   string `json:"dbName"`
+		Host             string `json:"host"`
+		Port             int    `json:"port"`
+		User             string `json:"user"`
+		Password         string `json:"password"`
+		DbName           string `json:"dbName"`
 	} `json:"database"`
-	JwtSecretKey string `json:"jwtSecretKey"`
-	Host         string `json:"host"`
+	JwtSecretKey         string `json:"jwtSecretKey"`
+	Host                 string `json:"host"`
+	JwtTokenLifetimeDays int    `json:"jwtTokenLifetimeDays"`
 }
 
 func LoadConfig(filename string) (Config, error) {

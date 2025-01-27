@@ -8,6 +8,8 @@ from repositories.patient import PatientRepository
 
 from routes.patient import patients_router
 
+from auth.auth import AuthMiddleware
+
 app = FastAPI()
 
 app.include_router(patients_router)
@@ -25,13 +27,15 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+auth_middleware = AuthMiddleware()
+app.add_middleware(BaseHTTPMiddleware, dispatch=auth_middleware)
+
 @app.on_event("startup")
 async def app_startup():
     app.state.conn_pool = await create_connection_pool()
     app.state.repositories = {
         "patient": PatientRepository(app.state.conn_pool)
     }
-
 
 @app.on_event("shutdown")
 async def app_shutdown():

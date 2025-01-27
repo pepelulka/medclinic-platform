@@ -136,7 +136,7 @@ func PostLogin(ctx *gin.Context, repo *db.UserRepository, cfg config.Config) {
 		return
 	}
 
-	jwtToken, err := createJwt(userInfo, cfg.JwtSecretKey)
+	jwtToken, err := createJwt(userInfo, cfg.JwtSecretKey, cfg.JwtTokenLifetimeDays)
 	if err != nil {
 		print(5)
 		makeError(ctx, err)

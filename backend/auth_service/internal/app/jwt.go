@@ -8,13 +8,13 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-func createJwt(userInfo models.UserInfo, jwtSecret string) (string, error) {
+func createJwt(userInfo models.UserInfo, jwtSecret string, daysToExpire int) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"login":      userInfo.Login,
 		"role":       userInfo.Role,
 		"patient_id": userInfo.PatientId,
 		"doctor_id":  userInfo.DoctorId,
-		"expires":    time.Now().Format(time.RFC3339),
+		"expires":    time.Now().AddDate(0, 0, daysToExpire).Format(time.RFC3339),
 	})
 
 	// Sign and get the complete encoded token as a string using the secret

@@ -7,5 +7,6 @@
         "dbName": "pepe"
     },
     "jwtSecretKey": "PEPE",
-    "host": "localhost"
+    "host": "localhost",
+    "jwtTokenLifetimeDays": 3
 }

@@ -4,7 +4,9 @@ from starlette.middleware.cors import CORSMiddleware
 
 from db.postgres import create_connection_pool, close_connection_pool
 
+from repositories.doctor import DoctorRepository
 from repositories.patient import PatientRepository
+from routes.doctor import doctors_router
 
 from routes.patient import patients_router
 
@@ -13,6 +15,7 @@ from auth.auth import AuthMiddleware
 app = FastAPI()
 
 app.include_router(patients_router)
+app.include_router(doctors_router)
 
 origins = [
     "http://localhost:5173",
@@ -34,7 +37,8 @@ app.add_middleware(BaseHTTPMiddleware, dispatch=auth_middleware)
 async def app_startup():
     app.state.conn_pool = await create_connection_pool()
     app.state.repositories = {
-        "patient": PatientRepository(app.state.conn_pool)
+        "patient": PatientRepository(app.state.conn_pool),
+        "doctor": DoctorRepository(app.state.conn_pool)
     }
 
 @app.on_event("shutdown")

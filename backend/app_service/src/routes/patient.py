@@ -1,7 +1,4 @@
-from fastapi import APIRouter, Request, Response
-from typing import List
-
-from pydantic import ValidationError
+from fastapi import APIRouter, Request
 
 patients_router = APIRouter()
 
